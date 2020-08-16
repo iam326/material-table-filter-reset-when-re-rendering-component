@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import MaterialTable from 'material-table';
+import MaterialTable, { Column } from 'material-table';
 
-const tableData = [
+type Coupon = {
+  couponId: string;
+  storeName: string;
+  couponName: string;
+  discountRate: number;
+  startDate: string;
+  endDate: string;
+};
+
+const tableData: Array<Coupon> = [
   {
     couponId: '0001',
     storeName: '秋葉原店',
@@ -47,6 +56,32 @@ const tableData = [
 
 const DataTable: React.FC = () => {
   const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
+  const [columnInfo] = useState<Array<Column<Coupon>>>([
+    {
+      title: 'クーポン ID',
+      field: 'couponId',
+    },
+    { title: '店舗', field: 'storeName' },
+    {
+      title: 'クーポン名',
+      field: 'couponName',
+    },
+    {
+      title: '割引率',
+      field: 'discountRate',
+      cellStyle: { textAlign: 'right' },
+    },
+    {
+      title: '利用開始日',
+      field: 'startDate',
+      cellStyle: { textAlign: 'right' },
+    },
+    {
+      title: '利用終了日',
+      field: 'endDate',
+      cellStyle: { textAlign: 'right' },
+    },
+  ]);
   return (
     <MaterialTable
       options={{
@@ -81,32 +116,7 @@ const DataTable: React.FC = () => {
           onClick: () => alert('Button Click!!'),
         },
       ]}
-      columns={[
-        {
-          title: 'クーポン ID',
-          field: 'couponId',
-        },
-        { title: '店舗', field: 'storeName' },
-        {
-          title: 'クーポン名',
-          field: 'couponName',
-        },
-        {
-          title: '割引率',
-          field: 'discountRate',
-          cellStyle: { textAlign: 'right' },
-        },
-        {
-          title: '利用開始日',
-          field: 'startDate',
-          cellStyle: { textAlign: 'right' },
-        },
-        {
-          title: '利用終了日',
-          field: 'endDate',
-          cellStyle: { textAlign: 'right' },
-        },
-      ]}
+      columns={columnInfo}
       data={tableData}
       title="クーポン一覧"
     />
