@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import MaterialTable from 'material-table';
 
 const tableData = [
@@ -45,13 +46,41 @@ const tableData = [
 ];
 
 const DataTable: React.FC = () => {
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
   return (
     <MaterialTable
       options={{
         search: false,
         draggable: false,
         filtering: true,
+        rowStyle: (rowData) => ({
+          backgroundColor: selectedCouponId === rowData.couponId ? '#eee' : '',
+        }),
       }}
+      onRowClick={(_, rowData) =>
+        setSelectedCouponId(
+          rowData &&
+            (!selectedCouponId || selectedCouponId !== rowData.couponId)
+            ? rowData.couponId
+            : null
+        )
+      }
+      actions={[
+        {
+          icon: () => (
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={!selectedCouponId}
+            >
+              使用する
+            </Button>
+          ),
+          disabled: !selectedCouponId,
+          isFreeAction: true,
+          onClick: () => alert('Button Click!!'),
+        },
+      ]}
       columns={[
         {
           title: 'クーポン ID',
