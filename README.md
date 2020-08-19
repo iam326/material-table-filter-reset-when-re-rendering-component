@@ -1,4 +1,4 @@
-# Title
+# material-table-filter-reset-when-re-rendering-component
 
 [material-table](https://material-table.com/#/) でコンポーネント再描画時にフィルターがリセットされてしまう現象への対処法。
 
