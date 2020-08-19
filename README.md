@@ -1,6 +1,6 @@
 # Title
 
-[material-table](https://material-table.com/#/) で再描画時にフィルターがリセットされてしまう現象への対処法。
+[material-table](https://material-table.com/#/) でコンポーネント再描画時にフィルターがリセットされてしまう現象への対処法。
 
 ## 問題となる現象
 
